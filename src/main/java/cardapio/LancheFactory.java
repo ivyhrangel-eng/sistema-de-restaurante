@@ -2,7 +2,7 @@ package cardapio;
 
 public class LancheFactory {
 
-    // Cada método retorna uma NOVA instância de Lanche com os padrões do cardápio
+
     public static Lanche xBurger() {
         return new Lanche("X-Burger", 16.0);
     }

@@ -1,7 +1,7 @@
 package cardapio;
 
 public class ComBaconExtra implements ItemCardapio {
-    private ItemCardapio item; // O item que está a ser "embrulhado"
+    private ItemCardapio item;
 
     public ComBaconExtra(ItemCardapio item) {
         this.item = item;
@@ -9,13 +9,13 @@ public class ComBaconExtra implements ItemCardapio {
 
     @Override
     public String getDescricao() {
-        // Junta a descrição anterior com o formato exato do bacon extra
+
         return item.getDescricao() + " + bacon extra";
     }
 
     @Override
     public double getPreco() {
-        // Soma o preço anterior com os R$ 6,00 do bacon extra
+
         return item.getPreco() + 6.0;
     }
     @Override

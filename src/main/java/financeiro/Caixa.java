@@ -8,7 +8,7 @@ public class Caixa {
     private HashSet<Transacao> transacoes = new HashSet<>();
 
     private Caixa() {
-        // Construtor privado impede novos "new Caixa()" externos
+
     }
 
     public static synchronized Caixa getInstancia() {
@@ -18,7 +18,7 @@ public class Caixa {
         return instanciaUnica;
     }
 
-    // Registra a transação. Retorna true se inseriu, false se já existia (evita duplicadas)
+
     public boolean registrarTransacao(Pedido pedido, double gorjeta) {
         Transacao t = new Transacao(pedido.getNumero(), pedido.calcularTotal(), gorjeta);
         return transacoes.add(t);

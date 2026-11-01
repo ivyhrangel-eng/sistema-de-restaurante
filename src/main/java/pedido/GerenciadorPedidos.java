@@ -33,7 +33,7 @@ public class GerenciadorPedidos {
         return totalDia;
     }
 
-    // Cancela e remove o pedido inteiro do mapa
+
     public void removerPedido(int numero) {
         if (pedidos.containsKey(numero)) {
             pedidos.remove(numero);
@@ -42,7 +42,7 @@ public class GerenciadorPedidos {
         }
     }
 
-    // Nível 3.3: Retorna um conjunto com todas as descrições únicas de itens vendidos no dia
+
     public HashSet<String> getCombinacoesDiferentes() {
         HashSet<String> combinacoes = new HashSet<>();
         for (Pedido p : pedidos.values()) {

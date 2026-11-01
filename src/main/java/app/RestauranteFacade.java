@@ -23,7 +23,7 @@ public class RestauranteFacade {
         return gerenciador.calcularTotalDoDia();
     }
 
-    // A Facade agora delega a criação dos lanches para a LancheFactory
+
     public Lanche criarLancheDoCardapio(int opcaoCardapio) {
         switch (opcaoCardapio) {
             case 1:
@@ -47,12 +47,12 @@ public class RestauranteFacade {
         return gerenciador.buscarPedido(numero);
     }
 
-    // Expõe a exclusão/cancelamento do pedido
+
     public void cancelarPedido(int numero) {
         gerenciador.removerPedido(numero);
     }
 
-    // Expõe o HashSet de combinações diferentes para o fechamento
+
     public java.util.HashSet<String> getCombinacoesDiferentes() {
         return gerenciador.getCombinacoesDiferentes();
     }

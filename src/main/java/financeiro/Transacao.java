@@ -25,7 +25,7 @@ public class Transacao {
         return gorjeta;
     }
 
-    //equals e hashCode baseados no número do pedido para evitar duplicadas no HashSet
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

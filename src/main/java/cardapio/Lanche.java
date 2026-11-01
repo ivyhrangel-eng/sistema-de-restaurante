@@ -4,7 +4,7 @@ public class Lanche implements ItemCardapio {
     private String nome;
     private double preco;
 
-    // Ingredientes vêm true por padrão (o lanche nasce completo)
+
     private boolean queijo = true;
     private boolean alface = true;
     private boolean tomate = true;
@@ -37,7 +37,7 @@ public class Lanche implements ItemCardapio {
         this.preco = preco;
     }
 
-    // Getters e Setters para os ingredientes personalizáveis
+
     public boolean isQueijo() { return queijo; }
     public void setQueijo(boolean queijo) { this.queijo = queijo; }
 
@@ -50,7 +50,7 @@ public class Lanche implements ItemCardapio {
     public boolean isCebola() { return cebola; }
     public void setCebola(boolean cebola) { this.cebola = cebola; }
 
-    // Descrição dinâmica que acrescenta os ingredientes removidos
+
     @Override
     public String getDescricao() {
         String desc = nome;
@@ -60,7 +60,7 @@ public class Lanche implements ItemCardapio {
         if (!cebola) desc += " sem cebola";
         return desc;
     }
-    // Implementação do lanche base
+
     @Override
     public String getNomeBase() {
         return this.nome;

@@ -9,7 +9,7 @@ import java.util.InputMismatchException;
 public class MenuConsole {
     private Scanner scanner = new Scanner(System.in);
 
-    // Método auxiliar seguro para ler números e tratar InputMismatchException
+
     private int lerInteiro(String mensagem) {
         while (true) {
             try {
@@ -18,7 +18,7 @@ public class MenuConsole {
                 scanner.nextLine(); // Limpa o buffer após ler o número
                 return numero;
             } catch (InputMismatchException e) {
-                System.out.println("❌ Entrada inválida! Por favor, digite apenas números inteiros.");
+                System.out.println(" Entrada inválida! Por favor, digite apenas números inteiros.");
                 scanner.nextLine(); // Descarta a entrada incorreta para evitar loop infinito
             }
         }
@@ -92,8 +92,8 @@ public class MenuConsole {
 
     public void exibirFechamentoDoDia(double total, java.util.HashSet<String> combinacoes) {
         System.out.println("\n=== FECHAMENTO DO RESTAURANTE ===");
-        System.out.println("💰 Faturamento Total do Dia: R$ " + total);
-        System.out.println("🍔 Total de combinações diferentes pedidas: " + combinacoes.size());
+        System.out.println(" Faturamento Total do Dia: R$ " + total);
+        System.out.println(" Total de combinações diferentes pedidas: " + combinacoes.size());
         System.out.println("Lista de combinações registradas:");
         if (combinacoes.isEmpty()) {
             System.out.println("  (Nenhuma combinação registrada)");
@@ -170,16 +170,16 @@ public class MenuConsole {
 
     public void exibirFechamentoCompleto(double totalVendas, double totalGorjetas, java.util.HashSet<String> combinacoes, java.util.HashSet<String> bases) {
         System.out.println("\n=== FECHAMENTO PROFISSIONAL DO RESTAURANTE ===");
-        System.out.println("💰 Faturamento em Vendas: R$ " + totalVendas);
+        System.out.println(" Faturamento em Vendas: R$ " + totalVendas);
         System.out.println("tip Total de Gorjetas Arrecadadas: R$ " + totalGorjetas);
-        System.out.println("💵 Faturamento Geral (Vendas + Gorjetas): R$ ( " + (totalVendas + totalGorjetas) + " )");
+        System.out.println("Faturamento Geral (Vendas + Gorjetas): R$ ( " + (totalVendas + totalGorjetas) + " )");
 
-        System.out.println("\n🍔 Lanches base diferentes vendidos: " + bases.size());
+        System.out.println("\n Lanches base diferentes vendidos: " + bases.size());
         for (String base : bases) {
             System.out.println("  - " + base);
         }
 
-        System.out.println("\n✨ Combinações completas diferentes pedidas: " + combinacoes.size());
+        System.out.println("\n Combinações completas diferentes pedidas: " + combinacoes.size());
         for (String comb : combinacoes) {
             System.out.println("  - " + comb);
         }
