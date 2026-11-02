@@ -43,4 +43,8 @@ public class Caixa {
     public HashSet<Transacao> getTransacoes() {
         return transacoes;
     }
+
+    public void limparParaTestes() {
+        this.transacoes.clear();
+    }
 }

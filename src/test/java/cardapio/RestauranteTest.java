@@ -1,5 +1,6 @@
 package cardapio;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,6 +8,11 @@ import pedido.Pedido;
 import financeiro.Caixa;
 
 public class RestauranteTest {
+
+    @BeforeEach
+    void setUp() {
+        Caixa.getInstancia().limparParaTestes();
+    }
 
     @Test
     void naoDevePermitirPrecoNegativo() {
