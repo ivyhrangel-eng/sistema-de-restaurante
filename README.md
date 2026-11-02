@@ -1,48 +1,224 @@
-# Sistema de Restaurante em Java
+#  Sistema de Restaurante em Java
 
-Sistema de gerenciamento de restaurante desenvolvido em **Java** como parte de uma jornada de aprendizado em Orientação a Objetos, aplicação de princípios **SOLID**, **Design Patterns** e arquitetura limpa em camadas.
+Um sistema de gerenciamento de restaurante desenvolvido em **Java**, com execução pelo terminal, aplicação de **Programação Orientada a Objetos (POO)**, princípios **SOLID** e padrões de projeto.
 
+O projeto simula operações comuns de um restaurante, desde a criação e personalização de pedidos até o fechamento do caixa e a geração de estatísticas do dia.
 
+> Projeto desenvolvido como prática de programação Java, organização de código e aplicação de conceitos de arquitetura e design de software.
 
-# Funcionalidades do Sistema
+---
 
-O sistema é operado via console (linha de comando) e conta com um menu interativo robusto que permite:
-* **Gestão de Pedidos:** Abertura de comandas com atribuição automática de números, adição de itens, listagem e cancelamento/modificação.
-* **Cardápio e Personalização:** Escolha de lanches base (*X-Burger*, *X-Salada*, *X-Bacon*) com a possibilidade de retirar ingredientes (sem alteração de preço).
-* **Adicionais Dinâmicos (Decorator):** Acréscimo de opcionais pagos (*Cheddar* e *Bacon Extra*) que atualizam descrições e valores de forma flexível.
-* **Módulo Financeiro (Caixa & Singleton):** Fechamento de caixa unificado, controle de transações sem duplicidade e registro de gorjetas.
-* **Relatórios de Inteligência (HashSet):** Exibição de estatísticas no fechamento do dia, incluindo faturamento total, total de gorjetas, total de lanches base diferentes e combinações completas únicas vendidas.
-* **Blindagem de Entrada (Robustez):** Tratamento completo de exceções (como `InputMismatchException`) para impedir que entradas incorretas quebrem o sistema.
+##  Visão geral
 
+O sistema oferece um menu interativo pelo terminal para que o usuário possa:
 
+- Criar pedidos e associá-los a clientes.
+- Escolher lanches disponíveis no cardápio.
+- Personalizar ingredientes dos lanches.
+- Adicionar complementos e atualizar os preços.
+- Consultar, modificar e cancelar pedidos.
+- Registrar pagamentos e gorjetas.
+- Visualizar informações financeiras e estatísticas no fechamento do restaurante.
 
-# Arquitetura e Padrões de Projeto Utilizados
+Os dados são gerenciados em memória durante a execução do programa.
 
-O projeto está estruturado em pacotes seguindo a separação de responsabilidades:
-* **`app`**: Camada de apresentação contendo o `Main`, o `MenuConsole` (exclusivo para I/O) e o `RestauranteFacade` (ponto de entrada unificado para as regras de negócio).
-* **`cardapio`**: Contém a interface `ItemCardapio`, a classe `Lanche`, a **`LancheFactory`** (para criação centralizada) e os **`Decorators`** (`ComCheddar`, `ComBaconExtra`).
-* **`pedido`**: Gerencia as comandas através de `Pedido` e o `GerenciadorPedidos` utilizando `HashMap` e `HashSet`.
-* **`financeiro`**: Contém a classe `Transacao` (`equals` e `hashcode` por ID de pedido) e o **`Caixa`** implementado sob o padrão **Singleton**.
+##  Funcionalidades
 
+###  Gerenciamento de pedidos
+- Criação de pedidos com numeração automática.
+- Associação de pedidos aos nomes dos clientes.
+- Consulta dos pedidos registrados.
+- Inclusão e remoção de itens.
+- Cancelamento de pedidos.
 
-# Testes Unitários
+###  Cardápio e personalização
+O sistema disponibiliza três opções de lanches:
 
-O projeto possui suítes de testes automatizados implementadas com **JUnit** em `src/test/java`, cobrindo:
-* Validação contra preços negativos.
-* Funcionamento correto do padrão *Decorator* (soma de valores).
-* Prevenção de transações duplicadas no caixa via `HashSet`.
-* Delegação correta do nome base pelos lanches embrulhados.
-* Cálculo correto de gorjetas.
+| Lanche | Preço |
+|---|---:|
+| X-Burger | R$ 16,00 |
+| X-Salada | R$ 18,00 |
+| X-Bacon | R$ 22,00 |
 
+Também é possível personalizar os lanches, retirando ingredientes como queijo, alface, tomate e cebola.
 
+###  Adicionais
+O cliente pode acrescentar complementos ao lanche:
 
-# Como Executar o Projeto
+- Cheddar: R$ 4,00.
+- Bacon extra: R$ 6,00.
 
-1. Certifique-se de ter o **JDK (Java Development Kit)** instalado em sua máquina.
-2. Clone este repositório ou baixe o código-fonte.
-3. Abra o projeto em sua IDE favorita (como **IntelliJ IDEA** ou Eclipse).
-4. Navegue até a classe principal `Main.java` (localizada no pacote `app`).
-5. Execute a classe para iniciar o menu interativo no terminal.
+Os adicionais são aplicados dinamicamente por meio do padrão **Decorator**, permitindo combinar complementos sem alterar diretamente a classe do lanche original.
 
+###  Caixa e fechamento
+- Registro de transações.
+- Controle de valores das vendas.
+- Registro e cálculo de gorjetas.
+- Prevenção de transações duplicadas.
+- Cálculo do faturamento geral.
 
+###  Relatórios e estatísticas
+No fechamento do restaurante, o sistema apresenta:
 
+- Total de vendas.
+- Total de gorjetas.
+- Faturamento geral.
+- Quantidade de lanches base diferentes vendidos.
+- Combinações completas diferentes solicitadas.
+
+--
+
+##  Arquitetura e organização do projeto
+
+O código foi dividido em pacotes para separar responsabilidades e facilitar a manutenção.
+
+```text
+sistema-de-restaurante/
+│
+├── src/
+│   ├── main/
+│   │   └── java/
+│   │       ├── app/
+│   │       │   ├── Main.java
+│   │       │   ├── MenuConsole.java
+│   │       │   └── RestauranteFacade.java
+│   │       │
+│   │       ├── cardapio/
+│   │       │   ├── ItemCardapio.java
+│   │       │   ├── Lanche.java
+│   │       │   ├── LancheFactory.java
+│   │       │   ├── ComCheddar.java
+│   │       │   └── ComBaconExtra.java
+│   │       │
+│   │       ├── pedido/
+│   │       │   ├── Pedido.java
+│   │       │   └── GerenciadorPedidos.java
+│   │       │
+│   │       └── financeiro/
+│   │           ├── Caixa.java
+│   │           └── Transacao.java
+│   │
+│   └── test/
+│       └── java/
+│           └── cardapio/
+│               └── RestauranteTest.java
+│
+└── pom.xml
+```
+
+### Responsabilidade dos pacotes
+
+| Pacote | Responsabilidade |
+|---|---|
+| `app` | Inicialização, interação com o usuário e coordenação das funcionalidades. |
+| `cardapio` | Representação dos lanches, criação e aplicação de adicionais. |
+| `pedido` | Criação, consulta, gerenciamento e remoção de pedidos. |
+| `financeiro` | Registro de transações, vendas e gorjetas. |
+
+---
+
+##  Conceitos e padrões de projeto aplicados
+
+O desenvolvimento utiliza conceitos de orientação a objetos e padrões de projeto para organizar as responsabilidades do sistema.
+
+| Conceito / Padrão | Aplicação no projeto |
+|---|---|
+| **POO** | Classes, objetos, encapsulamento e abstração das entidades do restaurante. |
+| **SOLID** | Separação de responsabilidades e organização das classes. |
+| **Factory** | Centralização da criação dos lanches disponíveis no cardápio. |
+| **Decorator** | Adição dinâmica de cheddar e bacon extra aos lanches. |
+| **Facade** | Centralização do acesso às operações do sistema por meio de `RestauranteFacade`. |
+| **Singleton** | Garantia de uma instância compartilhada da classe `Caixa`. |
+| **HashMap** | Armazenamento e consulta de pedidos por número. |
+| **HashSet** | Controle de transações únicas e identificação de combinações diferentes. |
+
+---
+
+##  Testes unitários
+
+O projeto possui testes automatizados utilizando **JUnit 5**, localizados em `src/test/java`.
+
+Os testes implementados verificam:
+
+- Bloqueio de preços negativos.
+- Cálculo correto do preço de um X-Bacon com cheddar.
+- Prevenção de transações duplicadas no caixa.
+- Preservação do nome base do lanche após a aplicação de Decorators.
+- Cálculo correto das gorjetas.
+
+Esses testes ajudam a verificar comportamentos específicos das classes e regras implementadas.
+
+---
+
+##  Tecnologias utilizadas
+
+- **Java 21** — linguagem de programação.
+- **Maven** — gerenciamento do projeto e dependências.
+- **JUnit 5** — testes unitários.
+- **Mockito** — dependência de suporte a testes.
+- **IntelliJ IDEA** — ambiente de desenvolvimento.
+- **Git e GitHub** — versionamento e publicação do código.
+
+---
+
+##  Como executar o projeto
+
+### Pré-requisitos
+
+Antes de executar, certifique-se de ter instalado:
+
+- JDK 21.
+- Maven.
+- IntelliJ IDEA ou outra IDE compatível com Java.
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/ivyhrangel-eng/sistema-de-restaurante.git
+```
+
+### 2. Acesse a pasta do projeto
+
+```bash
+cd sistema-de-restaurante
+```
+
+### 3. Abra o projeto na IDE
+
+Importe o projeto como um projeto Maven e configure o JDK 21.
+
+### 4. Execute a aplicação
+
+Localize a classe:
+
+```text
+src/main/java/app/Main.java
+```
+
+Execute o método `main` para iniciar o menu interativo no terminal.
+
+### 5. Execute os testes
+
+Pelo terminal, na pasta do projeto:
+
+```bash
+mvn test
+```
+
+---
+
+##  Objetivo de aprendizado
+
+Este projeto faz parte da minha evolução prática no desenvolvimento Java.
+
+Durante sua construção, trabalhei com organização de classes e pacotes, gerenciamento de coleções, tratamento de regras de negócio, princípios SOLID, padrões de projeto e testes unitários.
+
+Mais do que implementar funcionalidades, o objetivo foi compreender como estruturar uma aplicação de forma organizada, reutilizável e com responsabilidades bem definidas.
+
+---
+
+##  Desenvolvido por
+
+**Ivyh Rangel**
+
+[GitHub](https://github.com/ivyhrangel-eng)
